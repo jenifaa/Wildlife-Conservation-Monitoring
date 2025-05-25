@@ -1,4 +1,4 @@
-## PostgreSQL কী?
+## 1. PostgreSQL কী?
 
 PostgreSQL হলো একটি বিনামূল্যের ও ওপেন সোর্স ডেটাবেস ম্যানেজমেন্ট সিস্টেম। এটি মূলত এমন একটি সফটওয়্যার যা ডেটা সংরক্ষণ, সাজানো এবং প্রয়োজনে খুঁজে পেতে সাহায্য করে। যখন বিশাল পরিমাণ বিস্তারিত তথ্য গুছিয়ে ও নিরাপদভাবে সংরক্ষণের প্রয়োজন হয়, তখন PostgreSQL ব্যবহার করাটা সবচেয়ে উপযুক্ত।
 
@@ -93,7 +93,77 @@ WHERE id = 1;
 ```
 
 
-### Primary Key (প্রাইমারি কি) কী? এবং Foreign Key (ফরেন কি) কী?
+## 2. Primary Key (প্রাইমারি কি) কী? এবং Foreign Key (ফরেন কি) কী?
+
+### Primary Key হচ্ছে এমন  কলাম  যার মান প্রতিটি রেকর্ডের (row) জন্য একটি ইউনিক আইডেন্টিফায়ার হয়।
+
+✅ এটি অবশ্যই ইউনিক (দু'বার একই মান রাখা যাবে না)
+
+✅ এটি null হতে পারে না
+
+✅ প্রতিটি টেবিলের মধ্যে শুধু একটি Primary Key থাকতে পারে
+
+#### কি কাজ করে?
+
+✅ Primary Key হচ্ছে টেবিলের প্রতিটি রেকর্ডকে সুনির্দিষ্টভাবে শনাক্ত করার জন্য।
+
+✅ এটি এমন একটি ফিল্ড (বা একাধিক ফিল্ড), যার মাধ্যমে প্রতিটি রো (row) আলাদা করে চেনা যায়।
+
+#### উদাহরণ (Primary Key):
+```
+CREATE TABLE products (
+  product_id SERIAL PRIMARY KEY,
+  name VARCHAR(100),
+  price NUMERIC(10, 2)
+);
+```
+product_id এখানে Primary Key।
+
+প্রতিটি পণ্যের জন্য এটি ইউনিক হবে: 1, 2, 3...
+
+
+### Foreign Key এমন একটি কলাম যা অন্য একটি টেবিলের Primary Key এর সাথে সম্পর্কযুক্ত (Link) থাকে।
+
+✅ এক টেবিলের রেকর্ডের সাথে অন্য টেবিলের রেকর্ডকে সংযুক্ত করে
+
+✅ এটি টেবিলগুলোর মধ্যে সম্পর্ক (Relationship) তৈরি করে
+
+✅ এটি ডেটার ইন্টিগ্রিটি বজায় রাখে (ভুল ডেটা ঢুকতে দেয় না)
+
+
+#### ✅ কাজের ধরন:
+তুমি যদি চাও orders টেবিল যেন customers টেবিলের সাথে যুক্ত থাকে, তবে orders.customer_id হবে customers.customer_id এর foreign key।
+
+#### ✅ বৈশিষ্ট্য (Features):
+
+1. Parent-Child সম্পর্ক তৈরি করে
+→ customers = parent, orders = child
+
+2. Referential Integrity বজায় রাখে
+→ যদি parent-এ কোন id না থাকে, child-এ সেই id ঢুকবে না।
+
+3. ON DELETE / ON UPDATE rules
+→ তুমি নির্ধারণ করতে পারো, parent রেকর্ড ডিলিট হলে child-এ কি হবে।
+
+
+#### উদাহরণ (Foreign Key):
+```
+CREATE TABLE customers (
+  customer_id SERIAL PRIMARY KEY,
+  name VARCHAR(100)
+);
+
+CREATE TABLE orders (
+  order_id SERIAL PRIMARY KEY,
+  order_date DATE,
+  customer_id INT,
+  FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+);
+```
+orders টেবিলের customer_id কলামটি হচ্ছে Foreign Key।
+
+
+
 
 
 
