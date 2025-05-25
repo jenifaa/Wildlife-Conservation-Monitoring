@@ -15,8 +15,8 @@ CREATE TABLE species (
 
 CREATE TABLE sightings (
     sighting_id SERIAL PRIMARY KEY,
-    ranger_id INT REFERENCES rangers (ranger_id),
-    species_id INT REFERENCES species (species_id),
+    ranger_id INTEGER REFERENCES rangers (ranger_id),
+    species_id INTEGER REFERENCES species (species_id),
     sighting_time TIMESTAMP NOT NULL,
     location VARCHAR(100) NOT NULL,
     notes TEXT
@@ -64,3 +64,14 @@ VALUES (4,'Derek Fox', 'Coastal Plains');
 
 -- problem-2
 SELECT COUNT(DISTINCT species_id) AS unique_species_count FROM sightings;
+-- problem-3
+SELECT * FROM sightings WHERE location ILIKE '%Pass%';
+-- problem-4
+SELECT rangers.name, COUNT(sightings.sighting_id) AS total_sightings FROM rangers 
+JOIN sightings  ON rangers.ranger_id = sightings.ranger_id
+GROUP BY rangers.name
+ORDER BY rangers.name;
+-- problem-5
+SELECT species.common_name FROM species
+LEFT JOIN sightings  ON species.species_id = sightings.species_id WHERE sightings.sighting_id IS NULL;
+-- problem-6
