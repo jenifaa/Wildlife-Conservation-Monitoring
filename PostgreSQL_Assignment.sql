@@ -88,3 +88,6 @@ SELECT sighting_id,
         WHEN EXTRACT(HOUR FROM sighting_time) BETWEEN 12 AND 17 THEN 'Afternoon'
         WHEN EXTRACT(HOUR FROM sighting_time) > 17 THEN 'Evening'
     END AS time_of_day FROM sightings;
+
+--   problem-9
+DELETE FROM rangers WHERE ranger_id NOT IN (SELECT DISTINCT ranger_id FROM sightings);  
