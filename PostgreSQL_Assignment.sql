@@ -22,10 +22,6 @@ CREATE TABLE sightings (
     notes TEXT
 );
 
--- DELETE FROM rangers;
--- DELETE FROM species;
--- DELETE FROM sightings;
-
 INSERT INTO
     rangers (ranger_id, name, region)
 VALUES (
