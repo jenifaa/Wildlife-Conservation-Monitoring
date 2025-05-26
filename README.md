@@ -285,8 +285,12 @@ SQL-এ WHERE ক্লজ ব্যবহার করা হয় একট�
 
 
 
-<pre><code>| id | name | age | grade | |-----|--------|-----|-------| | 1 | Nahida | 18 | A | | 2 | Jenifa | 20 | B | | 3 | Urmi | 19 | A | | 4 | Mili | 21 | C | </code></pre>
-
+| id  | name   | age | grade |
+|-----|--------|-----|-------|
+| 1   | Nahida | 18  | A     |
+| 2   | Jenifa | 20  | B     |
+| 3   | Urmi   | 19  | A     |
+| 4   | Mili   | 21  | C     |
 
 #### SELECT স্টেটমেন্ট কী করে?
 ```
@@ -306,7 +310,11 @@ SELECT * FROM students WHERE grade = 'A';
 
 🟢 ফলাফল হবে:
 
-<pre><code>| id | name | age | grade | |-----|-------|-----|-------| | 1 | Nahid | 18 | A | | 3 | Urmi | 19 | A | </code></pre>
+| id  | name  | age | grade |
+|-----|-------|-----|-------|
+| 1   | Nahid | 18  | A     |
+| 3   | Tamim | 19  | A     |
+
 
 
 
